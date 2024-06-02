@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Risk Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f0f8ff; /* Sky Blue */
+            background-image: url('D:\Stroke-Risk-Prediction-using-Machine-Learning-master\templatesgowsik.jpg'); /* Replace 'background_image.jpg' with your image file */
+            background-size: cover;
+            background-position: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background-color: #8a2be2; /* Violet */
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            color: #ffffff; /* White */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold;
+        }
+
+        .navbar-brand:hover {
+            color: #ffffff; /* White */
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #8a2be2;
+        }
+
+        .btn {
+            background-color: #8a2be2;
+            border-color: #8a2be2;
+        }
+
+        .btn:hover {
+            background-color: #6a1e9d;
+            border-color: #6a1e9d;
+        }
+
+        .btn:focus {
+            box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.5);
+        }
+
+        .bg-purple {
+            background-color: #8a2be2;
+            color: #ffffff;
+        }
+
+        .text-purple {
+            color: #8a2be2;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #8a2be2;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        .feature-description {
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+
+        .call-to-action {
+            background-color: #ffffff;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .call-to-action-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #8a2be2;
+            margin-bottom: 30px;
+        }
+
+        .call-to-action-button {
+            background-color: #8a2be2;
+            border-color: #8a2be2;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .call-to-action-button:hover {
+            background-color: #6a1e9d;
+            border-color: #6a1e9d;
+        }
+
+        .call-to-action-button:focus {
+            box-shadow: 0 0 0 0.2rem rgba(138, 43, 226, 0.5);
+        }
+
+        .testimonial {
+            background-color: #ffffff;
+            padding: 60px 0;
+        }
+
+        .testimonial-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8a2be2;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-quote {
+            font-size: 1.2rem;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-size: 1.2rem;
+            color: #666666;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Stroke Risk Prediction</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analysis">Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-container">
+                    <form action="{{ url_for('result') }}" method="post">
+                        <!-- Your form code goes here --> <div class="form-group">
+    <label for="gender">Gender</label>
+    <select class="form-control" id="gender" name="gender">
+        <option value="1">Male</option>
+        <option value="0">Female</option>
+       
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="age">Age</label>
+    <input type="number" class="form-control" id="age" name="age" placeholder="Age">
+</div>
+
+<div class="form-group">
+    <label for="hypertension">Hypertension</label>
+    <select class="form-control" id="hypertension" name="hypertension">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="heart_disease">Heart Disease</label>
+    <select class="form-control" id="heart_disease" name="heart_disease">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="ever_married">Ever Married</label>
+    <select class="form-control" id="ever_married" name="ever_married">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="work_type">Work Type</label>
+    <select class="form-control" id="work_type" name="work_type">
+        <option value="0">Government Job</option>
+        <option value="1">Never Worked</option>
+        <option value="2">Private</option>
+        <option value="3">Self-employed</option>
+        <option value="4">Children</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="Residence_type">Residence Type</label>
+    <select class="form-control" id="Residence_type" name="Residence_type">
+        <option value="1">Urban</option>
+        <option value="0">Rural</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="avg_glucose_level">Average Glucose Level</label>
+    <input type="text" class="form-control" id="avg_glucose_level" name="avg_glucose_level" placeholder="Average Glucose Level">
+</div>
+
+<div class="form-group">
+    <label for="bmi">BMI</label>
+    <input type="text" class="form-control" id="bmi" name="bmi" placeholder="BMI">
+</div>
+
+<div class="form-group">
+    <label for="smoking_status">Smoking Status</label>
+    <select class="form-control" id="smoking_status" name="smoking_status">
+        <option value="0">Unknown</option>
+        <option value="1">Formerly Smoked</option>
+        <option value="2">Never Smoked</option>
+        <option value="3">Currently Smokes</option>
+    </select>
+</div>
+
+                        <button type="submit" class="btn btn-dark btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section bg-purple">
+        <div class="container text-center">
+            <h2 class="text-white">Why Choose Us?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3 class="feature-title">Accurate Predictions</h3>
+                    <p class="feature-description">Our advanced algorithms ensure precise predictions for stroke risk.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Data Security</h3>
+                    <p class="feature-description">We prioritize the security and privacy of your personal data.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-user-md feature-icon"></i>
+                    <h3 class="feature-title">Expert Support</h3>
+                    <p class="feature-description">Our team of healthcare professionals is here to assist you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="container">
+            <h2 class="call-to-action-title">Get Started Today!</h2>
+            <p>Take control of your health and assess your stroke risk now.</p>
+            <a href="#" class="btn btn-lg call-to-action-button">Get Started</a>
+        </div>
+    </section>
+
+    <section class="testimonial">
+        <div class="container">
+            <h2 class="testimonial-title">Testimonials</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <blockquote class="testimonial-quote">
+                        "I found the Stroke Risk Prediction tool very useful and easy to use. It helped me understand my
+                        health risks better."
+                    </blockquote>
+                    <p class="testimonial-author">- John Doe</p>
+                </div>
+                <div class="col-md-6">
+                    <blockquote class="testimonial-quote">
+                        "As a healthcare professional, I highly recommend this tool to my patients for assessing stroke risk."
+                    </blockquote>
+                    <p class="testimonial-author">- Dr. Jane Smith</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+		<p class="text-center">Created by Gowsik Beesma Shilesh</p>
+            <p class="text-center">&copy; 2024 Stroke Risk Prediction</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+
+</html>

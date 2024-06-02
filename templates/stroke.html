@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Risk Diagnosis</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f0f8ff; /* Sky Blue */
+        }
+
+        .navbar {
+            background-color: #8a2be2; /* Violet */
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+        }
+
+        .hero-section {
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-title {
+		color: black;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-text {
+		color: black;
+            font-size: 18px;
+        }
+
+        .consult-btn {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .consult-btn:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Stroke Risk Diagnosis</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid hero-section">
+        <div class="container">
+            <h1 class="hero-title">You have been diagnosed with Stroke Risk</h1>
+            <p class="hero-text">The algorithm has diagnosed you with Stroke Risk based on your inputs.</p><p class="hero-text"> Please consult a Doctor.The predicted probability of stroke is: {{ probability }}</p>
+            <button class="consult-btn" onclick="window.location.href='/consult'">Consult a Doctor</button>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">What is Stroke?</h5>
+                        <p class="card-text">Learn more about what stroke is and its symptoms.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Prevention Tips</h5>
+                        <p class="card-text">Discover tips to prevent stroke and maintain a healthy lifestyle.</p>
+                        <a href="#" class="btn btn-primary">Discover Tips</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Treatment Options</h5>
+                        <p class="card-text">Explore treatment options available for stroke patients.</p>
+                        <a href="#" class="btn btn-primary">Explore Treatments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Created by Gowsik Beesma Shilesh
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
